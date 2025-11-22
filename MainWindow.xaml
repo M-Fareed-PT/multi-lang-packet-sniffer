@@ -1,0 +1,38 @@
+<Window x:Class="PacketSnifferWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Packet Sniffer (Simulated)" Height="600" Width="900">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Name="StartBtn" Click="StartBtn_Click" Width="100" Margin="0,0,10,0">Start</Button>
+            <Button Name="StopBtn" Click="StopBtn_Click" Width="100" IsEnabled="False">Stop</Button>
+            <TextBlock Margin="20,4,0,0">Captured:</TextBlock>
+            <TextBlock Name="CountText" Margin="5,4,0,0" FontWeight="Bold">0</TextBlock>
+            <TextBlock Margin="20,4,0,0">Packets/s (avg):</TextBlock>
+            <TextBlock Name="PpsText" Margin="5,4,0,0" FontWeight="Bold">0</TextBlock>
+        </StackPanel>
+
+        <DataGrid Name="PacketGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="PacketGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Index}" Width="40"/>
+                <DataGridTextColumn Header="Time" Binding="{Binding Timestamp}" Width="140"/>
+                <DataGridTextColumn Header="Src" Binding="{Binding Source}" Width="140"/>
+                <DataGridTextColumn Header="Dst" Binding="{Binding Destination}" Width="140"/>
+                <DataGridTextColumn Header="Proto" Binding="{Binding Protocol}" Width="80"/>
+                <DataGridTextColumn Header="Size" Binding="{Binding Size}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Margin="0,10,0,0" Padding="8">
+            <StackPanel>
+                <TextBlock FontWeight="Bold">Packet Details</TextBlock>
+                <TextBox Name="DetailsBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Height="150" IsReadOnly="True"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
